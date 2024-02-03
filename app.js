@@ -3,6 +3,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
 const db = require('./config/database.js');
 
 const indexRouter = require('./src/index');
@@ -46,9 +48,6 @@ app.use(cors(corsOptions));
 //   })
 // );
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 try {
   db.authenticate();
   console.log('Name :', db.config.database);
@@ -70,7 +69,7 @@ const syncDatabase = async () => {
   }
 };
 // async
-syncDatabase();
+// syncDatabase();
 
 app.use(logger('dev'));
 app.use(express.json());
