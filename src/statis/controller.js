@@ -5,18 +5,82 @@ const responseHelper = require('../../helpers/response-helper');
 const Statis = require('../../models/Statis');
 
 module.exports = {
-  getStatis: async (req, res) => {
+  getAll: async (req, res) => {
+    try {
+      const data = await Statis.findAll({
+        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
+      });
+      data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  },
+  getById: async (req, res) => {
     try {
       const data = await Statis.findOne({
         attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
-        where: { aktif: true },
+        where: {
+          id: req.params.id,
+        },
       });
-      data ? responseHelper.readSingleData(res, data) : responseHelper.notFound(res);
+      data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
-      res.status(404).json(err.message);
+      res.status(400).json(err.message);
+    }
+  },
+  getNominalBonus: async (req, res) => {
+    try {
+      const data = await Statis.findOne({
+        attributes: ['nominal_bonus'],
+        where: {
+          id: 1,
+        },
+      });
+      data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  },
+  updateNominalBonus: async (req, res) => {
+    const { nominal_bonus } = req.body;
+    try {
+      await Statis.update(
+        {
+          nominal_bonus: nominal_bonus,
+        },
+        { where: {} }
+      );
+      responseHelper.updated(res);
+    } catch (err) {
+      res.status(400).json(err.message);
     }
   },
 
+  updateStatis: async (req, res) => {
+    const { jam_start, jam_end, shift, min_efektif_start } = req.body;
+    const data = await Statis.findOne({
+      where: { id: req.params.id },
+      attributes: ['id'],
+    });
+    if (data) {
+      try {
+        await Statis.update(
+          {
+            shift: shift,
+            jam_start: jam_start,
+            jam_end: jam_end,
+            min_efektif_start: min_efektif_start,
+          },
+          { where: { id: data.id } }
+        );
+        responseHelper.updated(res);
+      } catch (err) {
+        res.status(400).json(err.message);
+      }
+    } else {
+      responseHelper.notFound(res);
+    }
+  },
   toggleShift: async (req, res) => {
     const { id, aktif } = req.body;
     try {
@@ -37,27 +101,17 @@ module.exports = {
       res.status(400).json(err.message);
     }
   },
-
-  updateStatis: async (req, res) => {
-    const { jam_start, jam_end } = req.body;
-    const data = await Statis.findOne({
-      where: { id: 1 },
-    });
-    if (data) {
-      try {
-        await Statis.update(
-          {
-            jam_start: jam_start,
-            jam_end: jam_end,
-          },
-          { where: { id: data.id } }
-        );
-        responseHelper.updated(res);
-      } catch (err) {
-        res.status(400).json(err.message);
-      }
-    } else {
-      responseHelper.notFound(res);
+  getShiftAktif: async (req, res) => {
+    try {
+      const data = await Statis.findOne({
+        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
+        where: {
+          aktif: true,
+        },
+      });
+      data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
+    } catch (err) {
+      res.status(400).json(err.message);
     }
   },
 };

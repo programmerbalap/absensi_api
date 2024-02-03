@@ -1,11 +1,14 @@
 'use strict';
 
 const express = require('express');
-const { toggleShift, getStatis, updateStatis } = require('./controller.js');
+const { toggleShift, updateStatis, getAll, getById, updateNominalBonus, getNominalBonus } = require('./controller.js');
 
 const router = express.Router();
-router.get('/statis', getStatis);
-router.patch('/statis', updateStatis);
+router.get('/statis', getAll);
+router.get('/statis/:id', getById);
+router.patch('/statis/:id', updateStatis);
+router.get('/statis_get_nominal_bonus', getNominalBonus);
+router.patch('/statis_update_nominal_bonus', updateNominalBonus);
 router.patch('/statis_shift_toggle', toggleShift);
 
 module.exports = router;

@@ -158,7 +158,7 @@ module.exports = {
     }
   },
   updateById: async (req, res) => {
-    const { nominal, id_jabatan, id_kemampuan } = req.body;
+    const { nominal } = req.body;
     const data = await Gaji.findOne({
       attributes: ['id', 'nominal', 'id_jabatan', 'id_kemampuan'],
       where: { id: req.params.id },
@@ -168,8 +168,6 @@ module.exports = {
         await Gaji.update(
           {
             nominal: nominal,
-            id_jabatan: id_jabatan,
-            id_kemampuan: id_kemampuan,
           },
           { where: { id: data.id } }
         );
