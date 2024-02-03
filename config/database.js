@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 
 let Config;
 
-if (process.env.DATABASE == 200) {
+if (process.env.NODE_ENV == 'production') {
   Config = {
     database: 'absensi_dev',
     username: 'muhammadsubhan',
@@ -13,16 +13,10 @@ if (process.env.DATABASE == 200) {
 } else {
   Config = {
     database: 'absensi_dev',
-    username: 'muhammadsubhan',
-    password: 'subhandatabase',
+    username: 'root',
+    password: '',
     host: 'localhost',
     dialect: 'mysql',
-
-    // database: 'absensi_dev',
-    // username: 'root',
-    // password: '',
-    // host: 'localhost',
-    // dialect: 'mysql',
   };
 }
 
