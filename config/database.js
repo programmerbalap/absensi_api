@@ -4,17 +4,17 @@ let Config;
 
 if (process.env.NODE_ENV === 'production') {
   Config = {
-    database: 'absensi_prod',
-    username: 'prod_username',
-    password: 'prod_password',
-    host: 'prod_host',
+    database: 'absensi_dev',
+    username: 'muhammadsubhan',
+    password: 'subhandatabase',
+    host: 'localhost',
     dialect: 'mysql',
   };
 } else {
   Config = {
     database: 'absensi_dev',
-    username: 'muhammadsubhan',
-    password: 'subhandatabase',
+    username: 'root',
+    password: '',
     host: 'localhost',
     dialect: 'mysql',
   };
