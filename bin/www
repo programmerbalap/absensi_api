@@ -12,10 +12,6 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
-const node_env = process.env.NODE_ENV;
-console.log('NODE_ENV (database.js):', node_env);
-const nodenv = process.env ? process.env.NODE_ENV : 'development';
-console.log('NODE_ENV (database.js):', nodenv);
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
