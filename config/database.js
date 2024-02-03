@@ -13,10 +13,16 @@ if (process.env.DATABASE == 200) {
 } else {
   Config = {
     database: 'absensi_dev',
-    username: 'root',
-    password: '',
+    username: 'muhammadsubhan',
+    password: 'subhandatabase',
     host: 'localhost',
     dialect: 'mysql',
+
+    // database: 'absensi_dev',
+    // username: 'root',
+    // password: '',
+    // host: 'localhost',
+    // dialect: 'mysql',
   };
 }
 
