@@ -13,8 +13,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   Config = {
     database: 'absensi_dev',
-    username: 'root',
-    password: '',
+    username: 'muhammadsubhan',
+    password: 'subhandatabase',
     host: 'localhost',
     dialect: 'mysql',
   };
