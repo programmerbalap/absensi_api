@@ -12,6 +12,8 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
+const node_env = process.env.NODE_ENV;
+console.log(node_env);
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
