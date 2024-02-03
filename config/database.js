@@ -2,7 +2,9 @@ const { Sequelize } = require('sequelize');
 
 let Config;
 
-if (process.env.NODE_ENV == 'production') {
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
+if (process.env.NODE_ENV === 'production') {
   Config = {
     database: 'absensi_dev',
     username: 'muhammadsubhan',
