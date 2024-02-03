@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 
 let Config;
 
-const nodenv = process.env.NODE_ENV || 'development';
+const nodenv = process.env ? process.env.NODE_ENV : 'development';
 console.log('NODE_ENV:', nodenv);
 
 if (nodenv === 'production') {
