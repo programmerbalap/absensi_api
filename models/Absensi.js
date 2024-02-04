@@ -27,7 +27,7 @@ const Absensi = db.define(
     tanggal: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.literal("CONVERT_TZ(CURRENT_DATE(), '+00:00', '+07:00')"),
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       validate: {
         notNull: {
           msg: 'Tanggal harus diisi.',
