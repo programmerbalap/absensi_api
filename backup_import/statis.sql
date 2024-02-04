@@ -27,17 +27,17 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `statis`
 --
 
--- CREATE TABLE `statis` (
---   `id` int(11) NOT NULL,
---   `jam_start` time NOT NULL,
---   `jam_end` time NOT NULL,
---   `min_efektif_start` int(11) NOT NULL,
---   `shift` varchar(20) NOT NULL,
---   `nominal_bonus` float NOT NULL,
---   `aktif` tinyint(1) NOT NULL DEFAULT 0,
---   `createdAt` datetime NOT NULL,
---   `updatedAt` datetime NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `statis` (
+  `id` int(11) NOT NULL,
+  `jam_start` time NOT NULL,
+  `jam_end` time NOT NULL,
+  `min_efektif_start` int(11) NOT NULL,
+  `shift` varchar(20) NOT NULL,
+  `nominal_bonus` float NOT NULL,
+  `aktif` tinyint(1) NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `statis`
