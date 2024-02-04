@@ -33,10 +33,10 @@ module.exports = {
             const idKota = kota[k].id;
             const namaKota = kota[k].nama;
 
-            // await Kabupaten.create({
-            //   id: idKota,
-            //   nama: namaKota,
-            // });
+            await Kabupaten.create({
+              id: idKota,
+              nama: namaKota,
+            });
           }
         } catch (err) {
           console.error(`Error fetching city data for province with id ${idProvinsi}:`, err.message);
