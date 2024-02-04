@@ -54,8 +54,8 @@ INSERT INTO `statis` (`id`, `jam_start`, `jam_end`, `min_efektif_start`, `shift`
 --
 -- Indeks untuk tabel `statis`
 --
--- ALTER TABLE `statis`
---   ADD PRIMARY KEY (`id`);
+ALTER TABLE `statis`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -64,9 +64,9 @@ INSERT INTO `statis` (`id`, `jam_start`, `jam_end`, `min_efektif_start`, `shift`
 --
 -- AUTO_INCREMENT untuk tabel `statis`
 --
--- ALTER TABLE `statis`
---   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
--- COMMIT;
+ALTER TABLE `statis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
