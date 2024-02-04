@@ -82,12 +82,12 @@ ALTER TABLE `karyawan`
 --
 -- Ketidakleluasaan untuk tabel `karyawan`
 --
-ALTER TABLE `karyawan`
-  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id`),
-  ADD CONSTRAINT `karyawan_ibfk_2` FOREIGN KEY (`tmp_lhr`) REFERENCES `kabupaten` (`id`),
-  ADD CONSTRAINT `karyawan_ibfk_3` FOREIGN KEY (`id_kab`) REFERENCES `kabupaten` (`id`),
-  ADD CONSTRAINT `karyawan_ibfk_4` FOREIGN KEY (`id_kemampuan`) REFERENCES `kemampuan` (`id`);
-COMMIT;
+-- ALTER TABLE `karyawan`
+--   ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id`),
+--   ADD CONSTRAINT `karyawan_ibfk_2` FOREIGN KEY (`tmp_lhr`) REFERENCES `kabupaten` (`id`),
+--   ADD CONSTRAINT `karyawan_ibfk_3` FOREIGN KEY (`id_kab`) REFERENCES `kabupaten` (`id`),
+--   ADD CONSTRAINT `karyawan_ibfk_4` FOREIGN KEY (`id_kemampuan`) REFERENCES `kemampuan` (`id`);
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
