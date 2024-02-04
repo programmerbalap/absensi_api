@@ -93,12 +93,7 @@ const Karyawan = db.define(
     },
     tmp_lhr: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Tempat tanggal lahir harus diisi.',
-        },
-      },
+      allowNull: true,
       references: {
         model: 'kabupaten',
         as: 'tmp_lhr',
@@ -126,12 +121,7 @@ const Karyawan = db.define(
     },
     id_kab: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Alamat harus diisi.',
-        },
-      },
+      allowNull: true,
       references: {
         model: 'kabupaten',
         as: 'alamat',
