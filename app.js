@@ -69,7 +69,7 @@ const syncDatabase = async () => {
   }
 };
 // async
-syncDatabase();
+// syncDatabase();
 
 app.use(logger('dev'));
 app.use(express.json());
