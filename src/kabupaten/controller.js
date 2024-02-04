@@ -38,6 +38,7 @@ module.exports = {
           nama: namaKota,
         });
       }
+      res.status(200).json({ message: 'Data has been successfully generated.' });
     } catch (err) {
       console.error(`Error fetching city data for province with id ${idProvinsi}:`, err.message);
     }
