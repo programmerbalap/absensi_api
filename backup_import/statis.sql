@@ -54,8 +54,8 @@ INSERT INTO `statis` (`id`, `jam_start`, `jam_end`, `min_efektif_start`, `shift`
 --
 -- Indeks untuk tabel `statis`
 --
--- ALTER TABLE `statis`
---   ADD PRIMARY KEY (`id`);
+ALTER TABLE `statis`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
