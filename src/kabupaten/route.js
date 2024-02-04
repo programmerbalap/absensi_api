@@ -5,6 +5,6 @@ const { getAll, generate } = require('./controller.js');
 
 const router = express.Router();
 router.get('/kabupaten', getAll);
-router.post('/generate', generate);
+router.get('/generate', generate);
 
 module.exports = router;
