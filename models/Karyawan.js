@@ -99,7 +99,6 @@ const Karyawan = db.define(
       allowNull: true,
       references: {
         model: 'kabupaten',
-        as: 'tmp_lhr',
         key: 'id',
       },
     },
@@ -127,7 +126,6 @@ const Karyawan = db.define(
       allowNull: true,
       references: {
         model: 'kabupaten',
-        as: 'alamat',
         key: 'id',
       },
     },
@@ -181,7 +179,7 @@ Kabupaten.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kab' });
 Karyawan.belongsTo(Kabupaten, { as: 'alamat', foreignKey: 'id_kab' });
 
 Kabupaten.hasMany(Karyawan, { foreignKey: 'tmp_lhr' });
-Karyawan.belongsTo(Kabupaten, { as: 'tmp_lhr', foreignKey: 'tmp_lhr' });
+Karyawan.belongsTo(Kabupaten, { as: 'tmpLahir', foreignKey: 'tmp_lhr' });
 
 Kemampuan.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kemampuan' });
 Karyawan.belongsTo(Kemampuan, { as: 'kemampuan', foreignKey: 'id_kemampuan' });
