@@ -7,13 +7,8 @@ const { DataTypes } = Sequelize;
 const Notifikasi = db.define(
   'notifikasi',
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     id_absensi: {
+      primaryKey: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {

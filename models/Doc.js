@@ -12,6 +12,7 @@ const Doc = db.define(
       primaryKey: true,
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: null,
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       references: {

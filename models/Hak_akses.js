@@ -8,13 +8,8 @@ const { DataTypes } = Sequelize;
 const Hak_akses = db.define(
   'hak_akses',
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: true,
-    },
     uuid_karyawan: {
+      primaryKey: true,
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
