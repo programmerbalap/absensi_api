@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `absensi` (
   `id` int(11) NOT NULL,
   `uuid_karyawan` varchar(255) NOT NULL,
-  `tanggal` datetime NOT NULL DEFAULT convert_tz(curdate(),'+00:00','+07:00'),
+  `tanggal` datetime NOT NULL DEFAULT current_timestamp(),
   `hadir` enum('Hadir','Izin','Tidak Hadir') DEFAULT 'Tidak Hadir',
   `keterangan` varchar(255) DEFAULT NULL,
   `nama_lokasi` varchar(100) NOT NULL,
