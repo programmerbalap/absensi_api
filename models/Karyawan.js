@@ -174,38 +174,38 @@ const Karyawan = db.define(
   { freezeTableName: true }
 );
 
-// Jabatan.hasMany(Karyawan);
-// Karyawan.belongsTo(Jabatan, { foreignKey: 'id_jabatan' });
+Jabatan.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_jabatan' });
+Karyawan.belongsTo(Jabatan, { as: 'jabatan', foreignKey: 'id_jabatan' });
 
-// Kabupaten.hasMany(Karyawan);
-// Karyawan.belongsTo(Kabupaten, { as: 'alamat', foreignKey: 'id_kab' });
+Kabupaten.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kab' });
+Karyawan.belongsTo(Kabupaten, { as: 'alamat', foreignKey: 'id_kab' });
 
-// Kabupaten.hasMany(Karyawan);
-// Karyawan.belongsTo(Kabupaten, { as: 'tmpLahir', foreignKey: 'tmp_lhr' });
+Kabupaten.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'tmp_lahir' });
+Karyawan.belongsTo(Kabupaten, { as: 'tmpLahir', foreignKey: 'tmp_lhr' });
 
-// Kemampuan.hasMany(Karyawan, { foreignKey: 'id_kemampuan' });
-// Karyawan.belongsTo(Kemampuan, { as: 'kemampuan', foreignKey: 'id_kemampuan' });
+Kemampuan.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kemampuan' });
+Karyawan.belongsTo(Kemampuan, { as: 'kemampuan', foreignKey: 'id_kemampuan' });
 
-// Karyawan.hasOne(Doc, { foreignKey: 'uuid_karyawan' });
-// Doc.belongsTo(Karyawan, { foreignKey: 'uuid_karyawan' });
+Karyawan.hasOne(Doc, { as: 'doc', foreignKey: 'uuid_karyawan' });
+Doc.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
-// Karyawan.hasMany(Lokasi, { as: 'lokasi', foreignKey: 'uuid_karyawan' });
-// Lokasi.belongsTo(Karyawan, { foreignKey: 'uuid_karyawan' });
+Karyawan.hasMany(Lokasi, { as: 'lokasi', foreignKey: 'uuid_karyawan' });
+Lokasi.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
-// Karyawan.hasOne(Hak_akses, { as: 'hak_akses', foreignKey: 'uuid_karyawan' });
-// Hak_akses.belongsTo(Karyawan, { foreignKey: 'uuid_karyawan' });
+Karyawan.hasOne(Hak_akses, { as: 'hak_akses', foreignKey: 'uuid_karyawan' });
+Hak_akses.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
-// Karyawan.hasMany(Absensi, { as: 'absensi', foreignKey: 'uuid_karyawan' });
-// Absensi.belongsTo(Karyawan, { foreignKey: 'uuid_karyawan' });
+Karyawan.hasMany(Absensi, { as: 'absensi', foreignKey: 'uuid_karyawan' });
+Absensi.belongsTo(Karyawan, { as: 'karryawan', foreignKey: 'uuid_karyawan' });
 
-// Absensi.hasOne(Notifikasi, { foreignKey: 'id_absensi' });
-// Notifikasi.belongsTo(Absensi, { foreignKey: 'id_absensi' });
+Absensi.hasOne(Notifikasi, { as: 'notifikasi', foreignKey: 'id_absensi' });
+Notifikasi.belongsTo(Absensi, { as: 'absensi', foreignKey: 'id_absensi' });
 
-// Jabatan.hasMany(Gaji, {as:'gaji', foreignKey: 'id_jabatan' });
-// Gaji.belongsTo(Jabatan, { as: 'jabatan', foreignKey: 'id_jabatan' });
+Jabatan.hasMany(Gaji, { as: 'gaji', foreignKey: 'id_jabatan' });
+Gaji.belongsTo(Jabatan, { as: 'jabatan', foreignKey: 'id_jabatan' });
 
-// Kemampuan.hasMany(Gaji, {as:'gaji', foreignKey: 'id_kemampuan' });
-// Gaji.belongsTo(Kemampuan, { as: 'kemampuan', foreignKey: 'id_kemampuan' });
+Kemampuan.hasMany(Gaji, { as: 'gaji', foreignKey: 'id_kemampuan' });
+Gaji.belongsTo(Kemampuan, { as: 'kemampuan', foreignKey: 'id_kemampuan' });
 
 Produk.hasMany(Produksi, { as: 'produksi', foreignKey: 'id_produk' });
 Produksi.belongsTo(Produk, { as: 'produk', foreignKey: 'id_produk' });
