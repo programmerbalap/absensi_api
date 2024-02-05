@@ -220,13 +220,19 @@ module.exports = {
     }
   },
 
-  getRiwayatAbsensi: async (req, res) => {
+  getDataAbsensi: async (req, res) => {
     try {
       const data = await Absensi.findAll({
-        attributes: ['id', 'tanggal', 'hadir', 'shift', 'time_start', 'time_end', 'bonus', 'nama_lokasi'],
+        attributes: ['id', 'tanggal', 'hadir', 'shift', 'keterangan', 'time_start', 'time_end', 'nama_lokasi'],
         where: {
-          [Op.and]: [{ uuid_karyawan: req.params.uuid }, { hadir: 'Hadir' }],
+          [Op.and]: [{ time_end: { [Op.not]: true } }],
         },
+        include: [
+          {
+            model: Karyawan,
+            attributes: ['nama'],
+          },
+        ],
         order: [['id', 'DESC']],
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
@@ -235,7 +241,7 @@ module.exports = {
     }
   },
 
-  getRiwayatByUser: async (req, res) => {
+  getDataAbsensiByUser: async (req, res) => {
     try {
       const data = await Absensi.findAll({
         attributes: ['id', 'tanggal', 'hadir', 'shift', 'time_start', 'time_end', 'bonus', 'nama_lokasi'],
