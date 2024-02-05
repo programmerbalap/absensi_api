@@ -11,10 +11,7 @@ const Doc = db.define(
     uuid_karyawan: {
       primaryKey: true,
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
       references: {
