@@ -8,13 +8,8 @@ const { DataTypes } = Sequelize;
 const Doc = db.define(
   'doc',
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     uuid_karyawan: {
+      primaryKey: true,
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
