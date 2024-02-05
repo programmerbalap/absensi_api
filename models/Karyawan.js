@@ -180,7 +180,7 @@ Karyawan.belongsTo(Jabatan, { as: 'jabatan', foreignKey: 'id_jabatan' });
 Kabupaten.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kab' });
 Karyawan.belongsTo(Kabupaten, { as: 'alamat', foreignKey: 'id_kab' });
 
-Kabupaten.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'tmp_lhr' });
+Kabupaten.hasMany(Karyawan, { foreignKey: 'tmp_lhr' });
 Karyawan.belongsTo(Kabupaten, { as: 'tmp_lhr', foreignKey: 'tmp_lhr' });
 
 Kemampuan.hasMany(Karyawan, { as: 'karyawan', foreignKey: 'id_kemampuan' });
