@@ -19,6 +19,7 @@ const hakAksesRoute = require('./src/hak_akses/route.js');
 const lokasiRoute = require('./src/lokasi/route.js');
 const kemampuanRoute = require('./src/kemampuan/route.js');
 const produksiRoute = require('./src/produksi/route.js');
+const produkRoute = require('./src/produk/route.js');
 const laporanRoute = require('./src/laporan/route.js');
 const karyawanRoute = require('./src/karyawan/route.js');
 const dashboardRoute = require('./src/dashboard/route.js');
@@ -69,7 +70,7 @@ const syncDatabase = async () => {
   }
 };
 // async
-// syncDatabase();
+syncDatabase();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -90,6 +91,7 @@ app.use(hakAksesRoute);
 app.use(lokasiRoute);
 app.use(kemampuanRoute);
 app.use(produksiRoute);
+app.use(produkRoute);
 app.use(laporanRoute);
 app.use(karyawanRoute);
 app.use(dashboardRoute);

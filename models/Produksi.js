@@ -14,13 +14,19 @@ const Produksi = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    nama: {
-      type: DataTypes.STRING,
+    id_produk: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Nama barang harus diisi.',
+          msg: 'Jenis produk harus diisi.',
         },
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      references: {
+        model: 'produk',
+        key: 'id',
       },
     },
     jumlah: {
