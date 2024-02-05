@@ -4,7 +4,7 @@ let Config;
 
 if (process.env.NODE_ENV === 'production') {
   Config = {
-    database: 'absensi_dev',
+    database: 'absensi_pro',
     username: 'muhammadsubhan',
     password: 'subhandatabase',
     host: 'localhost',
