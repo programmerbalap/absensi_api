@@ -244,13 +244,13 @@ module.exports = {
             },
           ],
         },
-        // include: [
-        //   {
-        //     model: Karyawan,
-        //     attributes: ['nama'],
-        //   },
-        // ],
-        // order: [['id', 'DESC']],
+        include: [
+          {
+            model: Karyawan,
+            attributes: ['nama'],
+          },
+        ],
+        order: [['id', 'DESC']],
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
