@@ -251,8 +251,8 @@ module.exports = {
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
-      // res.status(400).json(err.message);
-      console.log(err.stack);
+      res.status(400).json(err.message);
+      // console.log(err.stack);
     }
   },
 
