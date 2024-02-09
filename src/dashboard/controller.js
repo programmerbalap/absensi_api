@@ -57,7 +57,7 @@ module.exports = {
         where: {
           tanggal: tanggal,
         },
-        group: ['tanggal', 'uuid_karyawan'],
+        group: ['id', 'tanggal', 'uuid_karyawan'],
       });
 
       const jumlahHadir = data.filter((item) => item.hadir === 'Hadir').length;
