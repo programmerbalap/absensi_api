@@ -29,7 +29,7 @@ module.exports = {
   getAll: async (req, res) => {
     const absensiData = await Absensi.findAll({
       attributes: ['id', 'tanggal', 'hadir', 'uuid_karyawan'],
-      group: ['tanggal', 'uuid_karyawan'],
+      group: ['id', 'tanggal', 'uuid_karyawan'],
     });
 
     const dataKaryawan = await Karyawan.findAll({
