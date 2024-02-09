@@ -250,7 +250,7 @@ module.exports = {
             attributes: ['nama'],
           },
         ],
-        order: [['id', 'DESC']],
+        // order: [['id', 'DESC']],
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
