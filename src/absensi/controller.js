@@ -221,27 +221,27 @@ module.exports = {
   },
 
   getDataAbsensi: async (req, res) => {
-    // const search = req.query.search_query || '';
+    const search = req.query.search_query || '';
     try {
       const data = await Absensi.findAll({
         attributes: ['id', 'tanggal', 'hadir', 'shift', 'keterangan', 'time_start', 'time_end', 'nama_lokasi'],
         where: {
           [Op.and]: [
             { time_end: { [Op.not]: true } },
-            // {
-            //   [Op.or]: [
-            //     {
-            //       hadir: {
-            //         [Op.like]: '%' + search + '%',
-            //       },
-            //     },
-            //     {
-            //       tanggal: {
-            //         [Op.like]: '%' + search + '%',
-            //       },
-            //     },
-            //   ],
-            // },
+            {
+              [Op.or]: [
+                {
+                  hadir: {
+                    [Op.like]: '%' + search + '%',
+                  },
+                },
+                {
+                  tanggal: {
+                    [Op.like]: '%' + search + '%',
+                  },
+                },
+              ],
+            },
           ],
         },
         // include: [
