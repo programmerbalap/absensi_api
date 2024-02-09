@@ -227,7 +227,7 @@ module.exports = {
         attributes: ['id', 'tanggal', 'hadir', 'shift', 'keterangan', 'time_start', 'time_end', 'nama_lokasi'],
         where: {
           [Op.and]: [
-            { time_end: { [Op.not]: true } },
+            { time_end: { [Op.not]: false } },
             {
               [Op.or]: [
                 {
