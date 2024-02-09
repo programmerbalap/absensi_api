@@ -225,9 +225,16 @@ module.exports = {
     try {
       const data = await Absensi.findAll({
         attributes: ['id', 'tanggal', 'hadir', 'shift', 'keterangan', 'time_start', 'time_end', 'nama_lokasi'],
+        include: [
+          {
+            model: Karyawan,
+            as: 'karyawan',
+            attributes: ['nama'],
+          },
+        ],
         where: {
           [Op.and]: [
-            { time_end: { [Op.not]: false } },
+            { time_end: { [Op.not]: null } },
             {
               [Op.or]: [
                 {
@@ -235,26 +242,17 @@ module.exports = {
                     [Op.like]: '%' + search + '%',
                   },
                 },
-                {
-                  tanggal: {
-                    [Op.like]: '%' + search + '%',
-                  },
-                },
               ],
             },
           ],
         },
-        include: [
-          {
-            model: Karyawan,
-            attributes: ['nama'],
-          },
-        ],
-        // order: [['id', 'DESC']],
+
+        order: [['id', 'DESC']],
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
-      res.status(400).json(err.message);
+      // res.status(400).json(err.message);
+      console.log(err.stack);
     }
   },
 

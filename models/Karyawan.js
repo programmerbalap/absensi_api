@@ -194,7 +194,7 @@ Karyawan.hasOne(Hak_akses, { as: 'hak_akses', foreignKey: 'uuid_karyawan' });
 Hak_akses.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
 Karyawan.hasMany(Absensi, { as: 'absensi', foreignKey: 'uuid_karyawan' });
-Absensi.belongsTo(Karyawan, { as: 'karryawan', foreignKey: 'uuid_karyawan' });
+Absensi.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
 Absensi.hasOne(Notifikasi, { as: 'notifikasi', foreignKey: 'id_absensi' });
 Notifikasi.belongsTo(Absensi, { as: 'absensi', foreignKey: 'id_absensi' });
