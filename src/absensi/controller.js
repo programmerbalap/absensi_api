@@ -225,7 +225,23 @@ module.exports = {
       const data = await Absensi.findAll({
         attributes: ['id', 'tanggal', 'hadir', 'shift', 'keterangan', 'time_start', 'time_end', 'nama_lokasi'],
         where: {
-          [Op.and]: [{ time_end: { [Op.not]: true } }],
+          [Op.and]: [
+            { time_end: { [Op.not]: true } },
+            {
+              [Op.or]: [
+                {
+                  hadir: {
+                    [Op.like]: '%' + search + '%',
+                  },
+                },
+                {
+                  tanggal: {
+                    [Op.like]: '%' + search + '%',
+                  },
+                },
+              ],
+            },
+          ],
         },
         include: [
           {
