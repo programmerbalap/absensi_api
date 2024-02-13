@@ -11,6 +11,7 @@ module.exports = {
     const search = req.query.search_query || '';
     const date = new Date();
     const dateOnly = date.toISOString().substring(0, 10);
+    // const tanggal = new Date(`${req.params.hari_ini}T00:00:00Z`);
 
     const yearDefault = dateOnly.split('-')[0];
     const monthDefault = dateOnly.split('-')[1];
@@ -172,7 +173,8 @@ module.exports = {
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
-      res.status(400).json(err.message);
+      // res.status(400).json(err.message);
+      console.log(err.stack);
     }
   },
 
