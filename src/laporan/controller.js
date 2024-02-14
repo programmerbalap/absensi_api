@@ -240,6 +240,7 @@ module.exports = {
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
+      console.log(err.stack);
       res.status(400).json(err.message);
     }
   },
