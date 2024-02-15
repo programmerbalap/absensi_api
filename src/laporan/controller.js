@@ -105,9 +105,9 @@ module.exports = {
                 SELECT
                   CASE
                     WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN
-                      ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5 - a.nominal_gaji * 0.5) + SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * 2 * a.nominal_gaji / 60) % 60)
+                      ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60) ) * 1.5
                     ELSE
-                      ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60) ) * 2 
+                      ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 2 - a.nominal_gaji * 0.5) + SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * 2 * a.nominal_gaji / 60) % 60)
                   END
                 FROM absensi AS a
                 WHERE a.uuid_karyawan = karyawan.uuid
