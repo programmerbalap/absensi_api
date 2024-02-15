@@ -232,7 +232,7 @@ module.exports = {
             model: Absensi,
             as: 'absensi',
             attributes: ['tanggal', 'hadir'],
-            where: Sequelize.literal(`YEAR(tanggal) = ${year} AND MONTH(tanggal) = ${month}`),
+            where: Sequelize.literal(`YEAR(absensi.tanggal) = ${year} AND MONTH(absensi.tanggal) = ${month}`),
             required: false,
           },
         ],
