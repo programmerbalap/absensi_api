@@ -228,15 +228,15 @@ module.exports = {
             as: 'jabatan',
             attributes: ['nama'],
           },
-          // {
-          //   model: Absensi,
-          //   as: 'absensi',
-          //   attributes: ['tanggal', 'hadir'],
-          //   where: Sequelize.literal(`YEAR(tanggal) = ${year} AND MONTH(tanggal) = ${month}`),
-          //   required: false,
-          // },
+          {
+            model: Absensi,
+            as: 'absensi',
+            attributes: ['tanggal', 'hadir'],
+            where: Sequelize.literal(`YEAR(tanggal) = ${year} AND MONTH(tanggal) = ${month}`),
+            required: false,
+          },
         ],
-        // group: ['uuid', 'absensi.tanggal'],
+        group: ['uuid', 'absensi.tanggal'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
