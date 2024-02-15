@@ -236,7 +236,7 @@ module.exports = {
             required: false,
           },
         ],
-        // group: ['uuid', 'absensi.tanggal'],
+        group: ['uuid', 'absensi.tanggal'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
