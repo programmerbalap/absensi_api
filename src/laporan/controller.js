@@ -24,15 +24,15 @@ module.exports = {
           'no_nik',
           'nama',
           'jk',
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT GROUP_CONCAT(DISTINCT a.kemampuan SEPARATOR ', ')
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
-          //   'kemampuan',
-          // ],
+          [
+            Sequelize.literal(`(
+                SELECT GROUP_CONCAT(DISTINCT a.kemampuan SEPARATOR ', ')
+                FROM absensi AS a
+                WHERE a.uuid_karyawan = karyawan.uuid
+                AND a.hadir = 'Hadir'
+                AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
+            'kemampuan',
+          ],
           // [
           //   Sequelize.literal(`(
           //       SELECT COUNT(DISTINCT a.tanggal)
