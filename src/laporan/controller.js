@@ -136,16 +136,16 @@ module.exports = {
           //       AND a.shift = 'Lembur')`),
           //   'total_durasi_lembur',
           // ],
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
-          //       AND a.shift = 'Normal' )`),
-          //   'total_durasi_normal',
-          // ],
+          [
+            Sequelize.literal(`(
+                SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')
+                FROM absensi AS a
+                WHERE a.uuid_karyawan = karyawan.uuid
+                AND a.hadir = 'Hadir'
+                AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
+                AND a.shift = 'Normal' )`),
+            'total_durasi_normal',
+          ],
         ],
         where: {
           [Op.and]: [{ id_jabatan: [3, 4] }, { status_karyawan: 'Aktif' }],
