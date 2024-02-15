@@ -252,14 +252,13 @@ module.exports = {
             attributes: ['tanggal', 'hadir'],
             where: Sequelize.literal(`YEAR(tanggal) = ${year} AND MONTH(tanggal) = ${month}`),
             required: false,
+            group: ['absensi.uuid_karyawan', 'absensi.tanggal'],
           },
         ],
-        // group: ['uuid'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
-      console.log(err.stack);
-      res.status(400).json(err.stack);
+      res.status(400).json(err.message);
     }
   },
 };
