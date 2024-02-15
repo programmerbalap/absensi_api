@@ -220,15 +220,6 @@ module.exports = {
           AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
             'hadir',
           ],
-          // [
-          //   Sequelize.literal(`(
-          // SELECT COUNT(DISTINCT a.tanggal)
-          // FROM absensi AS a
-          // WHERE a.uuid_karyawan = Karyawan.uuid
-          // AND a.hadir = 'Tidak Hadir'
-          // AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
-          //   'tidak',
-          // ],
           [
             Sequelize.literal(`(
               SELECT 
@@ -265,7 +256,7 @@ module.exports = {
             required: false,
           },
         ],
-        // group: ['uuid_karyawan', 'absensi.tanggal'],
+        group: ['uuid_karyawan', 'absensi.tanggal'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
