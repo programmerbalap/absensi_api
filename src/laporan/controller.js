@@ -193,24 +193,24 @@ module.exports = {
           'uuid',
           'no_nik',
           'nama',
-          [
-            Sequelize.literal(`(
-          SELECT COUNT(DISTINCT a.tanggal) 
-          FROM absensi AS a
-          WHERE a.uuid_karyawan = karyawan.uuid 
-          AND a.hadir = 'Hadir' 
-          AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
-            'hadir',
-          ],
-          [
-            Sequelize.literal(`(
-          SELECT COUNT(DISTINCT a.tanggal)
-          FROM absensi AS a
-          WHERE a.uuid_karyawan = Karyawan.uuid
-          AND a.hadir = 'Tidak Hadir'
-          AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
-            'tidak',
-          ],
+          // [
+          //   Sequelize.literal(`(
+          // SELECT COUNT(DISTINCT a.tanggal)
+          // FROM absensi AS a
+          // WHERE a.uuid_karyawan = karyawan.uuid
+          // AND a.hadir = 'Hadir'
+          // AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
+          //   'hadir',
+          // ],
+          // [
+          //   Sequelize.literal(`(
+          // SELECT COUNT(DISTINCT a.tanggal)
+          // FROM absensi AS a
+          // WHERE a.uuid_karyawan = Karyawan.uuid
+          // AND a.hadir = 'Tidak Hadir'
+          // AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
+          //   'tidak',
+          // ],
         ],
         where: {
           [Op.and]: [{ id_jabatan: [3, 4] }, { status_karyawan: 'Aktif' }],
@@ -232,11 +232,11 @@ module.exports = {
             model: Absensi,
             as: 'absensi',
             attributes: ['tanggal', 'hadir'],
-            where: Sequelize.literal(`YEAR(absensi.tanggal) = ${year} AND MONTH(absensi.tanggal) = ${month}`),
+            where: Sequelize.literal(`YEAR(tanggal) = ${year} AND MONTH(tanggal) = ${month}`),
             required: false,
           },
         ],
-        // group: ['uuid', 'absensi.tanggal'],
+        group: ['uuid', 'absensi.tanggal'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
