@@ -265,7 +265,7 @@ module.exports = {
             required: false,
           },
         ],
-        group: ['absensi.tanggal'],
+        group: ['uuid'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
