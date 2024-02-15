@@ -197,6 +197,7 @@ module.exports = {
       responseHelper.readAllData(res, data);
     } catch (err) {
       res.status(400).json(err.stack);
+      console.log(err.stack);
     }
   },
 
