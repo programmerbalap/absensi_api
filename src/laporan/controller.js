@@ -90,7 +90,7 @@ module.exports = {
           //       AND a.shift = 'Lembur')`),
           //   'lembur',
           // ],
-          // [
+          [
             Sequelize.literal(`(
                 SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60))
                 FROM absensi AS a
@@ -190,7 +190,7 @@ module.exports = {
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
-      res.status(400).json(err.message);
+      res.status(400).json(err.stack);
     }
   },
 
