@@ -33,14 +33,14 @@ module.exports = {
                 AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
             'kemampuan',
           ],
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT COUNT(DISTINCT a.tanggal)
-          //       FROM absensi AS a
-          //       WHERE a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
-          //   'efektif_kerja',
-          // ],
+          [
+            Sequelize.literal(`(
+                SELECT COUNT(DISTINCT a.tanggal)
+                FROM absensi AS a
+                WHERE a.hadir = 'Hadir'
+                AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
+            'efektif_kerja',
+          ],
           // [
           //   Sequelize.literal(`(
           //       SELECT COUNT(DISTINCT a.tanggal)
