@@ -111,9 +111,10 @@ module.exports = {
                         ) - (a.nominal_gaji * 0.5)
                       ) + (
                         (
-                          SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60
+                          SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) % 60)
                         ) * 2 * a.nominal_gaji / 60
-                      )                    
+                      )
+                      
                     ELSE
                       ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
                   END
