@@ -91,15 +91,15 @@ module.exports = {
           //   'lembur',
           // ],
           // [
-          //   Sequelize.literal(`(
-          //       SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60))
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
-          //       AND a.shift = 'Normal')`),
-          //   'gaji_normal',
-          // ],
+            Sequelize.literal(`(
+                SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60))
+                FROM absensi AS a
+                WHERE a.uuid_karyawan = karyawan.uuid
+                AND a.hadir = 'Hadir'
+                AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
+                AND a.shift = 'Normal')`),
+            'gaji_normal',
+          ],
           // [
           //   Sequelize.literal(`(
           //       SELECT
@@ -114,24 +114,24 @@ module.exports = {
           //       AND a.shift = 'Lembur')`),
           //   'gaji_lembur',
           // ],
-          [
-            Sequelize.literal(`(
-              SELECT
-                CASE
-                  WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN ((FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji) - (a.nominal_gaji * 0.5)) + (ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60) * 2 * a.nominal_gaji / 60)
-                  ELSE ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
-                END
-              FROM absensi AS a
-              INNER JOIN karyawan ON a.uuid_karyawan = karyawan.uuid
-              WHERE
-                a.hadir = 'Hadir'
-                AND YEAR(a.tanggal) = ${year}
-                AND MONTH(a.tanggal) = ${month}
-                AND a.shift = 'Lembur'
-              GROUP BY karyawan.uuid
-            )`),
-            'gaji_lembur',
-          ],
+          // [
+          //   Sequelize.literal(`(
+          //     SELECT
+          //       CASE
+          //         WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN ((FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji) - (a.nominal_gaji * 0.5)) + (ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60) * 2 * a.nominal_gaji / 60)
+          //         ELSE ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
+          //       END
+          //     FROM absensi AS a
+          //     INNER JOIN karyawan ON a.uuid_karyawan = karyawan.uuid
+          //     WHERE
+          //       a.hadir = 'Hadir'
+          //       AND YEAR(a.tanggal) = ${year}
+          //       AND MONTH(a.tanggal) = ${month}
+          //       AND a.shift = 'Lembur'
+          //     GROUP BY karyawan.uuid
+          //   )`),
+          //   'gaji_lembur',
+          // ],
           // [
           //   Sequelize.literal(`(
           //     SELECT a.nominal_bonus
