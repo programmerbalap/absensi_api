@@ -265,7 +265,7 @@ module.exports = {
             required: false,
           },
         ],
-        group: ['uuid_karyawan', 'absensi.tanggal'],
+        group: ['absensi.tanggal'],
       });
       responseHelper.readAllData(res, data);
     } catch (err) {
