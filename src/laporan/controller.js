@@ -110,7 +110,7 @@ module.exports = {
                 FROM absensi AS a
                 WHERE a.uuid_karyawan = karyawan.uuid
                 AND a.hadir = 'Hadir'
-                AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
+                AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
                 AND a.shift = 'Lembur')`),
             'gaji_lembur',
           ],
