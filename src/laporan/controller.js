@@ -70,16 +70,6 @@ module.exports = {
           //    )`),
           //   'bonus',
           // ],
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT COUNT(DISTINCT a.tanggal)
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
-          //       AND a.shift = 'Normal')`),
-          //   'normal',
-          // ],
           [
             Sequelize.literal(`(
                 SELECT COUNT(DISTINCT a.tanggal)
@@ -87,9 +77,19 @@ module.exports = {
                 WHERE a.uuid_karyawan = karyawan.uuid
                 AND a.hadir = 'Hadir'
                 AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
-                AND a.shift = 'Lembur')`),
-            'lembur',
+                AND a.shift = 'Normal')`),
+            'normal',
           ],
+          // [
+          //   Sequelize.literal(`(
+          //       SELECT COUNT(DISTINCT a.tanggal)
+          //       FROM absensi AS a
+          //       WHERE a.uuid_karyawan = karyawan.uuid
+          //       AND a.hadir = 'Hadir'
+          //       AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
+          //       AND a.shift = 'Lembur')`),
+          //   'lembur',
+          // ],
           [
             Sequelize.literal(`(
                 SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60))
