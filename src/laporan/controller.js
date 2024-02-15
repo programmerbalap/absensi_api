@@ -139,11 +139,11 @@ module.exports = {
               WHERE a.uuid_karyawan = karyawan.uuid
               AND a.hadir = 'Hadir'
               AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
-              GROUP BY a.tanggal
               LIMIT 1
-            )`),
+              )`),
             'gaji_bonus',
           ],
+          // GROUP BY a.tanggal
           [
             Sequelize.literal(`(
                 SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')
