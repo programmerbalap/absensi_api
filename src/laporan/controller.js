@@ -114,23 +114,24 @@ module.exports = {
           //       AND a.shift = 'Lembur')`),
           //   'gaji_lembur',
           // ],
-          [
-            Sequelize.literal(`(
-              SELECT
-                CASE
-                  WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN ((FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji) - (a.nominal_gaji * 0.5)) + (ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60) * 2 * a.nominal_gaji / 60)
-                  ELSE ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
-                END
-              FROM absensi AS a
-              INNER JOIN karyawan ON a.uuid_karyawan = karyawan.uuid
-              WHERE
-                a.hadir = 'Hadir'
-                AND YEAR(a.tanggal) = ${year}
-                AND MONTH(a.tanggal) = ${month}
-                AND a.shift = 'Lembur'
-            )`),
-            'gaji_lembur',
-          ],
+          // [
+          //   Sequelize.literal(`(
+          //     SELECT
+          //       CASE
+          //         WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN ((FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji) - (a.nominal_gaji * 0.5)) + (ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60) * 2 * a.nominal_gaji / 60)
+          //         ELSE ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
+          //       END
+          //     FROM absensi AS a
+          //     INNER JOIN karyawan ON a.uuid_karyawan = karyawan.uuid
+          //     WHERE
+          //       a.hadir = 'Hadir'
+          //       AND YEAR(a.tanggal) = ${year}
+          //       AND MONTH(a.tanggal) = ${month}
+          //       AND a.shift = 'Lembur'
+          //     // GROUP BY karyawan.uuid
+          //   )`),
+          //   'gaji_lembur',
+          // ],
           // [
           //   Sequelize.literal(`(
           //     SELECT a.nominal_bonus
@@ -153,16 +154,16 @@ module.exports = {
                 AND a.shift = 'Lembur')`),
             'total_durasi_lembur',
           ],
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
-          //       AND a.shift = 'Normal' )`),
-          //   'total_durasi_normal',
-          // ],
+          [
+            Sequelize.literal(`(
+                SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')
+                FROM absensi AS a
+                WHERE a.uuid_karyawan = karyawan.uuid
+                AND a.hadir = 'Hadir'
+                AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month}
+                AND a.shift = 'Normal' )`),
+            'total_durasi_normal',
+          ],
         ],
         where: {
           [Op.and]: [{ id_jabatan: [3, 4] }, { status_karyawan: 'Aktif' }],
