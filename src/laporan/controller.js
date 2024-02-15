@@ -114,9 +114,9 @@ module.exports = {
                 AND YEAR(a.tanggal) = ${year}
                 AND MONTH(a.tanggal) = ${month}
                 AND a.shift = 'Lembur'
-              GROUP BY karyawan.uuid;            
                 )`),
             'gaji_lembur',
+            // GROUP BY karyawan.uuid;
           ],
           // [
           //   Sequelize.literal(`(
