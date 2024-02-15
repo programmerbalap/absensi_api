@@ -185,10 +185,8 @@ module.exports = {
           },
         ],
       });
-      responseHelper.readAllData(res, data);
-
-      // const filteredData = data.filter((employee) => employee.absensi.length > 0);
-      // responseHelper.readAllData(res, filteredData);
+      const filteredData = data.filter((employee) => employee.absensi.length > 0);
+      responseHelper.readAllData(res, filteredData);
     } catch (err) {
       res.status(400).json(err.message);
     }
