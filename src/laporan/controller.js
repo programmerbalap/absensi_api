@@ -220,20 +220,11 @@ module.exports = {
           AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
             'hadir',
           ],
-          // [
-          //   Sequelize.literal(`(
-          // SELECT COUNT(DISTINCT a.tanggal)
-          // FROM absensi AS a
-          // WHERE a.uuid_karyawan = karyawan.uuid
-          // AND a.hadir = 'Tidak Hadir'
-          // AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
-          //   'tidak',
-          // ],
           [
             Sequelize.literal(`(
           SELECT COUNT(DISTINCT a.tanggal)
           FROM absensi AS a
-          WHERE a.uuid_karyawan = Karyawan.uuid
+          WHERE a.uuid_karyawan = karyawan.uuid
           AND a.hadir = 'Tidak Hadir'
           AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
             'tidak',
