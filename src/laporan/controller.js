@@ -225,7 +225,7 @@ module.exports = {
           SELECT COUNT(DISTINCT a.tanggal)
           FROM absensi AS a
           WHERE a.uuid_karyawan = karyawan.uuid
-          AND a.hadir = 'Hadir'
+          AND a.hadir = 'Tidak Hadir'
           AND YEAR(a.tanggal) = ${year}  AND MONTH(a.tanggal) = ${month})`),
             'tidak',
           ],
