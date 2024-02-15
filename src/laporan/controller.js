@@ -107,7 +107,7 @@ module.exports = {
                 WHERE a.uuid_karyawan = karyawan.uuid
                 AND a.hadir = 'Hadir'
                 AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
-                AND a.shift = 'Normal')`),
+                AND a.shift = 'Lembur')`),
             'gaji_lembur',
           ],
           // [
