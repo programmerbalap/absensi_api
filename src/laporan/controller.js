@@ -116,17 +116,6 @@ module.exports = {
                 AND a.shift = 'Lembur')`),
             'gaji_lembur',
           ],
-
-          // (
-          //   (
-          //     FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji
-          //   ) - (a.nominal_gaji * 0.5)
-          // ) + (
-          //   (
-          //     SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60
-          //   ) * 2 * a.nominal_gaji / 60
-          // )
-
           // [
           //   Sequelize.literal(`(
           //       SELECT
