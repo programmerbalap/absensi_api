@@ -26,7 +26,7 @@ const dashboardRoute = require('./src/dashboard/route.js');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:8081', 'http://localhost:8088'];
+const allowedOrigins = ['http://localhost:8081', 'http://localhost:8088', 'http://103.127.98.129'];
 
 const corsOptions = {
   origin: (origin, callback) => {
