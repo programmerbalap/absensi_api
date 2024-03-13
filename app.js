@@ -15,7 +15,7 @@ const gajiRoute = require('./src/gaji/route.js');
 const kabupatenRoute = require('./src/kabupaten/route.js');
 const dokumenRoute = require('./src/dokumen/route.js');
 const absensiRoute = require('./src/absensi/route.js');
-const hakAksesRoute = require('./src/hak_akses/route.js');
+const AksesRoute = require('./src/akses/route.js');
 const lokasiRoute = require('./src/lokasi/route.js');
 const kemampuanRoute = require('./src/kemampuan/route.js');
 const produksiRoute = require('./src/produksi/route.js');
@@ -23,6 +23,7 @@ const produkRoute = require('./src/produk/route.js');
 const laporanRoute = require('./src/laporan/route.js');
 const karyawanRoute = require('./src/karyawan/route.js');
 const dashboardRoute = require('./src/dashboard/route.js');
+const profilRoute = require('./src/profil/route.js');
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.use(cors(corsOptions));
 // app.use(
 //   cors({
 //     credentials: true,
-//     origin: ['http://localhost:8081', ' http://172.16.7.230:8081'],
+//     origin: ['http://localhost:8081', 'http://localhost:8088', 'http://103.127.98.129'],
 //   })
 // );
 
@@ -87,7 +88,7 @@ app.use(jabatanRoute);
 app.use(kabupatenRoute);
 app.use(dokumenRoute);
 app.use(absensiRoute);
-app.use(hakAksesRoute);
+app.use(AksesRoute);
 app.use(lokasiRoute);
 app.use(kemampuanRoute);
 app.use(produksiRoute);
@@ -95,5 +96,6 @@ app.use(produkRoute);
 app.use(laporanRoute);
 app.use(karyawanRoute);
 app.use(dashboardRoute);
+app.use(profilRoute);
 
 module.exports = app;

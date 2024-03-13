@@ -33,14 +33,7 @@ module.exports = {
                 AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
             'kemampuan',
           ],
-          [
-            Sequelize.literal(`(
-                SELECT COUNT(DISTINCT a.tanggal)
-                FROM absensi AS a
-                WHERE a.hadir = 'Hadir'
-                AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month})`),
-            'efektif_kerja',
-          ],
+
           [
             Sequelize.literal(`(
                 SELECT COUNT(DISTINCT a.tanggal)
@@ -92,6 +85,17 @@ module.exports = {
           ],
           [
             Sequelize.literal(`(
+              SELECT a.nominal_gaji
+              FROM absensi AS a
+              WHERE a.uuid_karyawan = karyawan.uuid
+              AND a.hadir = 'Hadir'
+              AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
+              LIMIT 1
+              )`),
+            'nominal_gaji_per_jam',
+          ],
+          [
+            Sequelize.literal(`(
                 SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60))
                 FROM absensi AS a
                 WHERE a.uuid_karyawan = karyawan.uuid
@@ -116,23 +120,6 @@ module.exports = {
                 AND a.shift = 'Lembur')`),
             'gaji_lembur',
           ],
-          // [
-          //   Sequelize.literal(`(
-          //       SELECT
-          //         CASE
-          //           WHEN SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) > 60 THEN
-          //             (( FLOOR(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) / 60) * 2 * a.nominal_gaji) - (a.nominal_gaji * 0.5) ) + (ROUND (SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end)) % 60) * 2 * a.nominal_gaji / 60)
-          //           ELSE
-          //             ROUND(SUM(TIMESTAMPDIFF(MINUTE, a.time_start, a.time_end) * a.nominal_gaji / 60 * 1.5))
-          //         END
-          //       FROM absensi AS a
-          //       WHERE a.uuid_karyawan = karyawan.uuid
-          //       AND a.hadir = 'Hadir'
-          //       AND YEAR(a.tanggal) = ${year} AND MONTH(a.tanggal) = ${month}
-          //       AND a.shift = 'Lembur'
-          //       )`),
-          //   'gaji_lembur',
-          // ],
           [
             Sequelize.literal(`(
               SELECT a.nominal_bonus
@@ -144,7 +131,6 @@ module.exports = {
               )`),
             'gaji_bonus',
           ],
-          // GROUP BY a.tanggal
           [
             Sequelize.literal(`(
                 SELECT TIME_FORMAT(SEC_TO_TIME(ROUND(SUM(TIMESTAMPDIFF(SECOND, a.time_start, a.time_end)))), '%H:%i:%s')

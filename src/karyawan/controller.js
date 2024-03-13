@@ -35,7 +35,11 @@ module.exports = {
         where: {
           [Op.and]: [
             { status_karyawan: 'aktif' },
-            { id_jabatan: [3, 4] },
+            {
+              id_jabatan: {
+                [Op.not]: [1, 2],
+              },
+            },
             { on: false },
             {
               [Op.or]: [
@@ -100,6 +104,18 @@ module.exports = {
           ],
           [
             Sequelize.literal(`(
+            SELECT a.time_start
+            FROM absensi AS a
+            WHERE karyawan.uuid = a.uuid_karyawan
+            AND a.tanggal = '${tanggal}'
+            AND a.shift = '${nama_shift}'
+            ORDER BY a.id DESC
+            LIMIT 1
+            )`),
+            'durasi_mulai',
+          ],
+          [
+            Sequelize.literal(`(
             SELECT MIN(a.hadir)
             FROM absensi AS a
             WHERE karyawan.uuid = a.uuid_karyawan
@@ -129,9 +145,9 @@ module.exports = {
           ],
           [
             Sequelize.literal(`(
-          SELECT s.nominal_bonus
-          FROM statis AS s
-          WHERE s.aktif = true
+          SELECT p.nominal_bonus
+          FROM profil AS p
+          WHERE p.id = 1
           )`),
             'nominal_bonus',
           ],
@@ -140,7 +156,11 @@ module.exports = {
           [Op.and]: [
             { status_karyawan: 'Aktif' },
             { on: true },
-            { id_jabatan: [3, 4] },
+            {
+              id_jabatan: {
+                [Op.not]: [1, 2],
+              },
+            },
             {
               [Op.or]: [
                 {
@@ -193,7 +213,8 @@ module.exports = {
   },
   Karyawan_get_pemulihan: async (req, res) => {
     const search = req.query.search_query || '';
-    const { tanggal, nama_shift } = req.query;
+    const { tanggal, shift } = req.query;
+    console.log(tanggal, shift);
     const dateObject = new Date(tanggal);
     try {
       const data = await Karyawan.findAll({
@@ -202,14 +223,10 @@ module.exports = {
           [Op.and]: [
             { status_karyawan: 'aktif' },
             { on: true },
-            { id_jabatan: [3, 4] },
+            { id_jabatan: { [Op.not]: [1, 2] } },
             {
               [Op.or]: [
-                {
-                  nama: {
-                    [Op.like]: '%' + search + '%',
-                  },
-                },
+                { nama: { [Op.like]: '%' + search + '%' } },
                 {
                   no_nik: {
                     [Op.like]: '%' + search + '%',
@@ -229,6 +246,9 @@ module.exports = {
                   tanggal: {
                     [Op.not]: dateObject,
                   },
+                },
+                {
+                  shift: shift,
                 },
                 { time_end: null },
                 { exp: false },
@@ -506,8 +526,43 @@ module.exports = {
   karyawan_get_by_uuid: async (req, res) => {
     try {
       const data = await Karyawan.findOne({
-        attributes: ['uuid', 'nama', 'no_nik', 'jk', 'status_karyawan', 'tgl_lhr', 'no_telepon', 'no_rekening', 'id_jabatan', 'tmp_lhr', 'tgl_lhr', 'id_kab', 'id_kemampuan'],
+        attributes: [
+          'uuid',
+          'nama',
+          'no_nik',
+          'jk',
+          'status_karyawan',
+          'tgl_lhr',
+          'no_telepon',
+          'no_rekening',
+          'id_jabatan',
+          'tmp_lhr',
+          'tgl_lhr',
+          'id_kab',
+          'id_kemampuan',
+          [
+            Sequelize.literal(`(
+            SELECT g.nominal
+            FROM gaji AS g
+            WHERE g.id_jabatan = karyawan.id_jabatan 
+            AND g.id_kemampuan = karyawan.id_kemampuan 
+            )`),
+            'gaji',
+          ],
+        ],
         where: { uuid: req.params.uuid },
+        include: [
+          {
+            model: Jabatan,
+            as: 'jabatan',
+            attributes: ['nama'],
+          },
+          {
+            model: Kemampuan,
+            as: 'kemampuan',
+            attributes: ['nama'],
+          },
+        ],
       });
       data ? responseHelper.readSingleData(res, data) : responseHelper.notFound(res);
     } catch (err) {
@@ -588,7 +643,15 @@ module.exports = {
       const data = await Karyawan.findAll({
         attributes: ['uuid', 'nama'],
         where: {
-          [Op.and]: [{ status_karyawan: 'Aktif' }, { on: true }, { id_jabatan: [3, 4] }],
+          [Op.and]: [
+            { status_karyawan: 'Aktif' },
+            { on: true },
+            {
+              id_jabatan: {
+                [Op.not]: [1, 2],
+              },
+            },
+          ],
         },
         include: [
           {
@@ -601,7 +664,7 @@ module.exports = {
                     [Op.not]: dateObject,
                   },
                 },
-                { time_end: null },
+                // { time_end: null },
                 { exp: false },
               ],
             },
@@ -637,7 +700,7 @@ module.exports = {
                 },
               },
               { uuid_karyawan: { [Op.in]: uuidsToUpdate } },
-              { time_end: null },
+              // { time_end: null },
             ],
           },
         }

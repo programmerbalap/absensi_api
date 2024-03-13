@@ -30,9 +30,9 @@ module.exports = {
           ],
           [
             Sequelize.literal(`(
-              SELECT s.nominal_bonus
-              FROM statis AS s
-              WHERE s.aktif = true
+              SELECT p.nominal_bonus
+              FROM profil AS p
+              WHERE p.id = 1
            )`),
             'gaji_bonus',
           ],
@@ -80,6 +80,7 @@ module.exports = {
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
       res.status(400).json(err.message);
+      console.log(err.stack);
     }
   },
   getAll: async (req, res) => {

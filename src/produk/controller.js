@@ -31,7 +31,7 @@ module.exports = {
       const data = await Produk.create({
         nama: nama,
       });
-      data ? responseHelper.created(res, data) : responseHelper.notFound(res);
+      data ? responseHelper.created(res, data) : responseHelper.notValid(res);
     } catch (err) {
       res.status(400).json(err.message);
     }

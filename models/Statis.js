@@ -32,30 +32,12 @@ const Statis = db.define(
         },
       },
     },
-    min_efektif_start: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Jam harus diisi.',
-        },
-      },
-    },
     shift: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
           msg: 'Shif harus diisi.',
-        },
-      },
-    },
-    nominal_bonus: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Nominal bonus harus diisi.',
         },
       },
     },

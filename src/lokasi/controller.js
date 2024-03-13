@@ -34,7 +34,7 @@ module.exports = {
   },
   deleteById: async (req, res) => {
     const data = await Lokasi.findOne({
-      attributes: ['id', 'nama', 'latitude', 'longitude'],
+      attributes: ['id'],
       where: { id: req.params.id },
     });
     if (data) {
@@ -58,33 +58,30 @@ module.exports = {
         [Op.and]: [{ uuid_karyawan: uuid_karyawan }, { id: id }],
       },
     });
-    if (data) {
-      try {
-        await Lokasi.update(
-          {
-            uuid_karyawan: uuid_karyawan,
-            nama: nama,
-            latitude: lat,
-            longitude: lng,
-            max_jarak: max_jarak,
-            alamat: alamat,
+
+    if (!data) return responseHelper.notFound(res);
+
+    try {
+      await Lokasi.update(
+        {
+          uuid_karyawan: uuid_karyawan,
+          nama: nama,
+          latitude: lat,
+          longitude: lng,
+          max_jarak: max_jarak,
+          alamat: alamat,
+        },
+        {
+          where: {
+            [Op.and]: [{ uuid_karyawan: uuid_karyawan }, { id: id }],
           },
-          {
-            where: {
-              [Op.and]: [{ uuid_karyawan: uuid_karyawan }, { id: id }],
-            },
-          }
-        );
-        responseHelper.updated(res);
-      } catch (err) {
-        res.status(400).json(err.message);
-      }
-    } else {
-      responseHelper.notFound(res);
+        }
+      );
+      responseHelper.updated(res);
+    } catch (err) {
+      res.status(400).json(err.message);
     }
   },
-
-  // LOKASI KARYAWAN
   getAllKaryawanLokasi: async (req, res) => {
     const search = req.query.search_query || '';
     try {
@@ -141,7 +138,6 @@ module.exports = {
       res.status(400).json(err.message);
     }
   },
-
   getAllLokasiByUUID: async (req, res) => {
     try {
       const data = await Lokasi.findAll({
@@ -157,7 +153,6 @@ module.exports = {
       res.status(400).json(err.message);
     }
   },
-
   getLokasiById: async (req, res) => {
     try {
       const data = await Lokasi.findOne({
@@ -171,21 +166,20 @@ module.exports = {
       res.status(404).json(err.message);
     }
   },
-
   addLokasi: async (req, res) => {
-    const { uuid, nama, lat, lng, max_jarak, alamat, aktif } = req.body;
+    const { uuid_karyawan, nama, lat, lng, max_jarak, alamat, aktif } = req.body;
     try {
       if (aktif == true) {
         await Lokasi.update(
           { aktif: false },
           {
             where: {
-              uuid_karyawan: uuid,
+              uuid_karyawan: uuid_karyawan,
             },
           }
         );
         const data = await Lokasi.create({
-          uuid_karyawan: uuid,
+          uuid_karyawan: uuid_karyawan,
           nama: nama,
           latitude: lat,
           longitude: lng,
@@ -196,7 +190,7 @@ module.exports = {
         data ? responseHelper.created(res, data) : responseHelper.notFound(res);
       } else {
         const data = await Lokasi.create({
-          uuid_karyawan: uuid,
+          uuid_karyawan: uuid_karyawan,
           nama: nama,
           latitude: lat,
           longitude: lng,
@@ -210,7 +204,6 @@ module.exports = {
       res.status(400).json(err.message);
     }
   },
-
   setAktifById: async (req, res) => {
     const { id, uuid_karyawan } = req.body;
 

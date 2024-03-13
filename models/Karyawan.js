@@ -14,6 +14,7 @@ const Hak_akses = require('./Hak_akses');
 const Gaji = require('./Gaji');
 const Produk = require('./Produk');
 const Produksi = require('./Produksi');
+const Akses = require('./Akses');
 
 const { DataTypes } = Sequelize;
 
@@ -190,8 +191,8 @@ Doc.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 Karyawan.hasMany(Lokasi, { as: 'lokasi', foreignKey: 'uuid_karyawan' });
 Lokasi.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
-Karyawan.hasOne(Hak_akses, { as: 'hak_akses', foreignKey: 'uuid_karyawan' });
-Hak_akses.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
+Karyawan.hasOne(Akses, { as: 'akses', foreignKey: 'uuid_karyawan' });
+Akses.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });
 
 Karyawan.hasMany(Absensi, { as: 'absensi', foreignKey: 'uuid_karyawan' });
 Absensi.belongsTo(Karyawan, { as: 'karyawan', foreignKey: 'uuid_karyawan' });

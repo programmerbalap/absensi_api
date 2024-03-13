@@ -53,6 +53,16 @@ const Produksi = db.define(
         key: 'uuid',
       },
     },
+    kualitas: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: false,
+    },
+    setujui: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
     tanggal: {
       type: DataTypes.DATE,
       allowNull: false,

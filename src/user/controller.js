@@ -65,9 +65,9 @@ module.exports = {
         ],
         [
           Sequelize.literal(`(
-          SELECT s.nominal_bonus
-          FROM statis AS s
-          WHERE s.aktif = true
+          SELECT p.nominal_bonus
+          FROM profil AS p
+          WHERE p.id = 1
           )`),
           'nominal_bonus',
         ],

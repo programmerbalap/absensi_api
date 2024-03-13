@@ -3,7 +3,7 @@
 const responseHelper = require('../../helpers/response-helper');
 const Karyawan = require('../../models/Karyawan');
 const Absensi = require('../../models/Absensi');
-const { Op } = require('sequelize');
+const Produksi = require('../../models/Produksi');
 
 function getDaysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
@@ -16,10 +16,25 @@ function hitungPersentaseKehadiranPerBulan(data, tahun, jumlahKaryawan) {
       const tanggal = new Date(item.tanggal);
       return tanggal.getFullYear() == tahun && tanggal.getMonth() == bulan - 1;
     });
-    const jumlahHadir = filteredData.filter((item) => item.hadir === true).length;
+    const jumlahHadir = filteredData.filter((item) => item.hadir == 'Hadir').length;
     const jumlahHari = getDaysInMonth(tahun, bulan);
     const persentases = (jumlahHadir / jumlahHari) * jumlahKaryawan;
     const persentase = persentases.toFixed(1);
+    persentasePerBulan.push({ bulan, persentase });
+  }
+  return persentasePerBulan;
+}
+
+function hitungPersentaseProduksiPerBulan(data, tahun) {
+  const persentasePerBulan = [];
+  for (let bulan = 1; bulan <= 12; bulan++) {
+    const filteredData = data.filter((item) => {
+      const tanggal = new Date(item.tanggal);
+      return tanggal.getFullYear() == tahun && tanggal.getMonth() == bulan - 1;
+    });
+    const jumlahProduksi = filteredData.reduce((total, item) => total + item.jumlah, 0);
+    const jumlahHari = getDaysInMonth(tahun, bulan);
+    const persentase = (jumlahProduksi / jumlahHari) * 100; // Menghitung persentase produksi
     persentasePerBulan.push({ bulan, persentase });
   }
   return persentasePerBulan;
@@ -35,17 +50,20 @@ module.exports = {
     const dataKaryawan = await Karyawan.findAll({
       attributes: ['uuid'],
       where: {
-        [Op.or]: [
-          {
-            id_jabatan: 4,
-          },
-        ],
+        id_jabatan: [4, 5],
       },
     });
 
     const jumlahKaryaawan = dataKaryawan.length;
 
     const data = hitungPersentaseKehadiranPerBulan(absensiData, req.query.year, jumlahKaryaawan);
+    data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
+  },
+  getPersentaseProduksi: async (req, res) => {
+    const produksiData = await Produksi.findAll({
+      attributes: ['tanggal', 'jumlah', 'jenis_produk', 'nama_produksi'],
+    });
+    const data = hitungPersentaseProduksiPerBulan(produksiData, req.query.year);
     data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
   },
 

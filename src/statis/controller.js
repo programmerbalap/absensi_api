@@ -8,7 +8,7 @@ module.exports = {
   getAll: async (req, res) => {
     try {
       const data = await Statis.findAll({
-        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
+        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'aktif'],
       });
       data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
     } catch (err) {
@@ -18,7 +18,7 @@ module.exports = {
   getById: async (req, res) => {
     try {
       const data = await Statis.findOne({
-        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
+        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'aktif'],
         where: {
           id: req.params.id,
         },
@@ -28,34 +28,6 @@ module.exports = {
       res.status(400).json(err.message);
     }
   },
-  getNominalBonus: async (req, res) => {
-    try {
-      const data = await Statis.findOne({
-        attributes: ['nominal_bonus'],
-        where: {
-          id: 1,
-        },
-      });
-      data ? responseHelper.readAllData(res, data) : responseHelper.notFound(res);
-    } catch (err) {
-      res.status(400).json(err.message);
-    }
-  },
-  updateNominalBonus: async (req, res) => {
-    const { nominal_bonus } = req.body;
-    try {
-      await Statis.update(
-        {
-          nominal_bonus: nominal_bonus,
-        },
-        { where: {} }
-      );
-      responseHelper.updated(res);
-    } catch (err) {
-      res.status(400).json(err.message);
-    }
-  },
-
   updateStatis: async (req, res) => {
     const { jam_start, jam_end, shift, min_efektif_start } = req.body;
     const data = await Statis.findOne({
@@ -69,7 +41,6 @@ module.exports = {
             shift: shift,
             jam_start: jam_start,
             jam_end: jam_end,
-            min_efektif_start: min_efektif_start,
           },
           { where: { id: data.id } }
         );
@@ -104,7 +75,7 @@ module.exports = {
   getShiftAktif: async (req, res) => {
     try {
       const data = await Statis.findOne({
-        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'min_efektif_start', 'nominal_bonus', 'aktif'],
+        attributes: ['id', 'jam_start', 'jam_end', 'shift', 'aktif'],
         where: {
           aktif: true,
         },

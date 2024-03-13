@@ -53,6 +53,12 @@ module.exports = {
       msg: 'Data tidak ditemukan!',
     });
   },
+  notValid: (res) => {
+    res.status(422).json({
+      code: 422,
+      msg: 'Data tidak valid!',
+    });
+  },
   badRequest: (res) => {
     res.status(400).json({
       code: 400,
