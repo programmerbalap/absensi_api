@@ -38,6 +38,7 @@ module.exports = {
   },
   me: async (req, res) => {
     const user = jwt.verify(req.headers['x-access-token'], process.env.ACCESS_TOKEN_SECRET);
+    if (!user) return responseHelper.notFound(res);
     const data = await Karyawan.findOne({
       attributes: [
         'uuid',
