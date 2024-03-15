@@ -27,28 +27,28 @@ const profilRoute = require('./src/profil/route.js');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:8081', 'http://localhost:8088', 'http://103.127.98.129', 'http://sinartanjunggroup.net'];
+// const allowedOrigins = ['http://localhost:8081', 'http://localhost:8088', 'http://sinartanjunggroup.net'];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+// };
 
 app.use(cors(corsOptions));
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: ['http://localhost:8081', 'http://localhost:8088', 'http://103.127.98.129'],
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:8081', 'http://localhost:8088', 'http://sinartanjunggroup.net'],
+  })
+);
 
 try {
   db.authenticate();
